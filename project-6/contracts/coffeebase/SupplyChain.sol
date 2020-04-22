@@ -52,7 +52,7 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
         string productNotes; // Product Notes
         uint256 productPrice; // Product Price
         State itemState; // Product State as represented in the enum above
-        address distributorID; // Metamask-Ethereum address of the Distributor
+        address payable distributorID; // Metamask-Ethereum address of the Distributor
         address retailerID; // Metamask-Ethereum address of the Retailer
         address payable consumerID; // Metamask-Ethereum address of the Consumer
     }
@@ -90,7 +90,7 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
         _;
         uint256 _price = items[_upc].productPrice;
         uint256 amountToReturn = msg.value - _price;
-        items[_upc].consumerID.transfer(amountToReturn);
+        msg.sender.transfer(amountToReturn);
     }
 
     // Define a modifier that checks if an item.state of a upc is Harvested
@@ -185,7 +185,6 @@ contract SupplyChain is Ownable, FarmerRole, DistributorRole, RetailerRole, Cons
         sku = sku + 1;
         // Emit the appropriate event
         emit Harvested(_upc);
-        addFarmer(_originFarmerID);
     }
 
     // Define a function 'processtItem' that allows a farmer to mark an item 'Processed'
