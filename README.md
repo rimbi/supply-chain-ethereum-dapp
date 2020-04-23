@@ -27,9 +27,9 @@ This repository containts an Ethereum DApp that demonstrates a Supply Chain flow
 
 ## Prerequisites
 
--Ganache
--Truffle
--Metamask
+- Truffle
+
+- Metamask
 
 ### Clone the repository
 ```
